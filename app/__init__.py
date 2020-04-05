@@ -17,6 +17,7 @@ SQLALCHEMY_DATABASE_URI = "postgresql://postgresr:postgresr@localhost/"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 app = Flask(__name__)
+app.jinja_env.auto_reload = True
 app.config.from_object(__name__)
 
 db = SQLAlchemy(app)
