@@ -4,14 +4,17 @@
   <div class="pb-4">
     <div>{{ field.label }}</div>
     
-    <div>{{ field(class="border-bottom border-right rounded", **kwargs)|safe }}</div>
-    <div class="text-danger">
+    <!-- <div>{{ field(class="border-bottom border-right border-danger rounded", **kwargs)|safe }}</div> -->
+    <div>
       {% if field.errors %}
-        <ul class=errors>
+      <div>{{ field(class="border-bottom border-right border-danger rounded", **kwargs)|safe }}</div>
+        <ul class="p-0 m-0 text-danger" style="list-style-type: none;">
           {% for error in field.errors %}
             <li>{{ error }}</li>
           {% endfor %}
         </ul>
+      {% else %}
+        <div>{{ field(class="border-bottom border-right rounded", **kwargs)|safe }}</div>
       {% endif %}
     </div>
   </div>

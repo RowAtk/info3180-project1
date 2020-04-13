@@ -10,7 +10,7 @@ class Profile(db.Model):
     gender = db.Column('gender', db.String(1), db.CheckConstraint("gender in ('M', 'F')"))
     email = db.Column(db.String, unique=True)
     location = db.Column(db.String(50))
-    bio = db.Column(db.String())
+    bio = db.Column(db.String(240))
     profile_picture = db.Column(db.String(), default="default-male.jpg")
     date_joined = db.Column(db.Date, nullable=False)
 

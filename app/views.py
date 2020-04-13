@@ -43,12 +43,18 @@ def add_profile():
             form.bio.data
         )
         profile.set_profile_img(process_pimg())
-        print(profile.firstname)
-        db.session.add(profile)
-        db.session.commit()
-        # print("ID: ",profile.pid)
-        # profile.set_profile_img(process_pimg(profile.pid))
-        return redirect(url_for('view_profiles'))
+
+        if profile:
+            print(profile.firstname)
+            db.session.add(profile)
+            db.session.commit()
+            flash('Profile added', 'success')
+            # print("ID: ",profile.pid)
+            # profile.set_profile_img(process_pimg(profile.pid))
+            return redirect(url_for('view_profiles'))
+        else:
+            flash('Profile unable to be added', 'success')
+            return redirect(url_for('add_profile'))
 
     # GET - Display prfile form
     print("GET/INVALID")
