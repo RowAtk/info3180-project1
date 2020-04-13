@@ -21,8 +21,8 @@
 {% block main %}
 <h1>Add Profile</h1>
 <hr class="mb-4">
-<form action="/profile" method="POST" class="d-block">
-    {{ form.csrf_token }}
+<form action="{{ url_for('add_profile') }}" method="POST" enctype="multipart/form-data" class="d-block">
+    {{ form.csrf_token }}   
 
     {{ render_field(form.firstname) }}
     {{ render_field(form.lastname) }}

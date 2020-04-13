@@ -10,8 +10,8 @@ class Profile(db.Model):
     gender = db.Column('gender', db.String(1), db.CheckConstraint("gender in ('M', 'F')"))
     email = db.Column(db.String, unique=True)
     location = db.Column(db.String(50))
-    bio = db.Column(db.String(300))
-    profile_picture = db.Column(db.String(50), default="dpic001.jpg", unique=True)
+    bio = db.Column(db.String())
+    profile_picture = db.Column(db.String(), default="default-male.jpg")
     date_joined = db.Column(db.Date, nullable=False)
 
     def __init__(self, firstname, lastname, gender, email, location, bio):

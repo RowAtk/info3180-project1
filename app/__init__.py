@@ -19,6 +19,6 @@ app.jinja_env.auto_reload = True
 app.config.from_object(__name__)
 
 db = SQLAlchemy(app)
-csrf = CSRFProtect(app)
+# csrf = CSRFProtect(app)
 
 from app import views, models

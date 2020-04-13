@@ -1,0 +1,9 @@
+.clickable {
+    cursor: pointer;
+}
+
+.card-top {
+    height: 0.5rem;
+    border-top: 0.5rem solid;
+    /* border-color: blue; */
+}

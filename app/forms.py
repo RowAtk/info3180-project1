@@ -27,8 +27,7 @@ class ProfileForm(FlaskForm):
     bio = TextAreaField(label="Biography", validators=[])
     ppicture = FileField(
         label="Profile Picture", 
-        validators=[
-            FileRequired(), 
+        validators=[ 
             FileAllowed(
                 ['jpg', 'png', 'jpeg'], 
                 message="Image Files Only"

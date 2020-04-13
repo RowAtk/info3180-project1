@@ -5,49 +5,56 @@ from app.forms import ProfileForm
 from flask import render_template, request, redirect, url_for, flash, session, abort
 from werkzeug.utils import secure_filename
 
+
+@app.route("/", methods=['GET']) # HOME
+def home():
+    return view_profiles()
+
 @app.route("/profile", methods=['GET', 'POST'])
 def add_profile():
     """ adding profiles to application """
 
-    def process_pimg(id):
+    def process_pimg():
         """ process profile image uploads for databse saving """
 
         img = form.ppicture.data
         if img:
+            print(img)
             filename = secure_filename(img.filename)
             if not filename:
                 filename = f"default-{id}"
             img.save(os.path.join(app.config['PROFILE_PICTURES'], filename)) # save uploaded profile picture
             return filename
-        return "default-male.png" if form.gender.data == 'M' else "default-female.png"
+        return "default/default-male.png" if form.gender.data == 'M' else "default/default-female.png"
+        # END process_pimg()
 
+    # Start add_profile()
     form = ProfileForm() # WTForm Object
 
     # POST - Accept form data
     if request.method == "POST" and form.validate_on_submit():
+        print("valid")
         profile = Profile(
-            form.firstname.data,
-            form.lastname.data,
+            form.firstname.data[0].upper() + form.firstname.data[1:],
+            form.lastname.data[0].upper() + form.lastname.data[1:],
             form.gender.data,
             form.email.data,
             form.location.data,
             form.bio.data
-            # process_pimg(form.ppicture.data)
         )
+        profile.set_profile_img(process_pimg())
+        print(profile.firstname)
         db.session.add(profile)
-        print(profile.pid)
-        return redirect(url_for('home'))
+        db.session.commit()
+        # print("ID: ",profile.pid)
+        # profile.set_profile_img(process_pimg(profile.pid))
+        return redirect(url_for('view_profiles'))
 
     # GET - Display prfile form
+    print("GET/INVALID")
     return render_template('add-profile.html', form=form)
 
 
-    
-    return render_template('add-profile.html')
-
-
-
-@app.route("/", methods=['GET']) # HOME
 @app.route("/profiles", methods=['GET'])
 def view_profiles():
     """ viewing all profiles in application """
