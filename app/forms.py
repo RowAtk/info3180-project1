@@ -23,7 +23,7 @@ class ProfileForm(FlaskForm):
             Email(message="Invalid Email")
         ]
     )
-    loaction = StringField(label="Location", validators=[DataRequired()])
+    location = StringField(label="Location", validators=[DataRequired()])
     bio = TextAreaField(label="Biography", validators=[])
     ppicture = FileField(
         label="Profile Picture", 

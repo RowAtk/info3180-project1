@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% macro render_field(field) %}
+  <div class="pb-4">
+    <div>{{ field.label }}</div>
+    
+    <div>{{ field(class="border-bottom border-right rounded", **kwargs)|safe }}</div>
+    <div class="text-danger">
+      {% if field.errors %}
+        <ul class=errors>
+          {% for error in field.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+  
+{% endmacro %}
+
+{% block main %}
+<h1>Add Profile</h1>
+<hr class="mb-4">
+<form action="/profile" method="POST" class="d-block">
+    {{ form.csrf_token }}
+
+    {{ render_field(form.firstname) }}
+    {{ render_field(form.lastname) }}
+    {{ render_field(form.gender) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.location) }}
+    {{ render_field(form.bio, style="width: 50%;") }}
+    {{ render_field(form.ppicture) }}
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

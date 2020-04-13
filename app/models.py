@@ -14,15 +14,18 @@ class Profile(db.Model):
     profile_picture = db.Column(db.String(50), default="dpic001.jpg", unique=True)
     date_joined = db.Column(db.Date, nullable=False)
 
-    def __init__(self, firstname, lastname, gender, email, location, bio, profile_picture):
+    def __init__(self, firstname, lastname, gender, email, location, bio):
         self.firstname = firstname
         self.lastname = lastname
         self.gender = gender
         self.email = email
         self.location = location
         self.bio = bio
-        self.profile_picture = profile_picture
         self.date_joined = date.today()
+
+    def set_profile_img(self, profile_picture):
+        """ set profile picture (filename) for profile object """
+        self.profile_picture = profile_picture
 
     def __repr__(self):
         return f"<Profile {self.firstname} {self.lastname}>"
