@@ -19,7 +19,6 @@ def add_profile():
 
         img = form.ppicture.data
         if img:
-            print(img)
             filename = secure_filename(img.filename)
             if not filename:
                 filename = f"default-{id}"
@@ -45,7 +44,6 @@ def add_profile():
         profile.set_profile_img(process_pimg())
 
         if profile:
-            print(profile.firstname)
             db.session.add(profile)
             db.session.commit()
             flash('Profile added', 'success')
